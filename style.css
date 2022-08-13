@@ -1,0 +1,315 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+canvas {
+    background-color: black;
+    display: block;
+    z-index: 1;
+
+}
+
+.game-container{
+    z-index: 1;
+    position: relative;
+}
+
+
+
+.background {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+
+
+.fullscreen-img{
+    height: 36px;
+    margin-right: 10px;
+}
+.fullscreen-img:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.start-img {
+    height: 480px;
+    width: 720px;
+    object-fit: cover;
+    position: absolute;
+    opacity: 1;
+    z-index: 1;
+}
+
+
+.start-button {
+    height: 45px;
+    width: 150px;
+    background-color: #FFDC00;
+    color: white;
+    border: 1.5px solid #C4613A;
+    font-size: 16px;
+    bottom: 0px;
+    left: 40%;
+    z-index: 100;
+    position: absolute;
+}
+
+.start-game:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+.end-img {
+    height: 480px;
+    width: 720px;
+    position: absolute;
+    top: 97px;
+    opacity: 1;
+}
+
+
+.restart-button {
+    height: 45px;
+    width: 150px;
+    background-color: #FFDC00;
+    color: white;
+    bottom: 0;
+    border: 1.5px solid #C4613A;
+    font-size: 16px;
+    z-index: 100;
+    position: absolute;
+    left: 40%;
+}
+
+.restart-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+
+.mute:hover {
+    opacity: 0.8;
+    border: 1px solid black;
+}
+
+
+.settings-container{
+    display: flex;
+    align-items: center;
+}
+
+
+.settings
+{
+    z-index: 1;
+    display: flex;
+    width: 720px;
+    justify-content: space-between;
+}
+.tutorial-text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.keybind{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.keybind-img{
+    height: 38px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 720px) {
+    canvas{
+        width: 100%;
+    }
+
+    .start-img{
+        width: 100%;
+        height: 100%;
+    }
+    .game-container{
+        width: 100%;
+    }
+    title {
+        display: none;
+    }
+    .settings{
+        width: 100%;
+    }
+    .fullscreen-img{
+        height: 30px;
+    }
+    .tutorial-text {
+        font-size: 16px !important;
+    }
+
+    .keybind-img{
+        height: 30px;
+        margin-left: 2px;
+    }
+    .start-button{
+        width: 100px;
+        height: 30px;
+    }
+    .restart-button{
+        width: 100px;
+        height: 30px;
+    }
+}
+
+
+.muted {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    display: none;
+}
+
+
+.turn-on__img{
+    height: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+@media (max-width: 520px) {
+    .keybind{
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .settings-container{
+        align-items: baseline;
+    }
+
+}
+
+@media only screen and (max-height : 480px ){
+    canvas{
+        height: 100vh; 
+        width: 100%;
+    }
+    .settings{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .game-container{
+        height: 100%;
+        width: 100%;
+    }
+
+    .keybind{
+        flex-direction:row;
+    }
+    .keybind-img{
+        height: 35px;
+        margin-left: 2px;
+    }
+
+
+    .start-img{
+        height: 100%;
+        width: 100%;
+    }
+
+    .settings{
+        display: none;
+    }
+    .background{
+        display: none;
+    }
+
+    h1{
+        display: none;
+    }
+}
+.hud {
+    display: none;
+}
+@media(max-width: 720px){
+
+    h1{
+        display: none;
+    }
+    .setting-responsiv{
+        top: 12px;
+        right: 1px;
+        position: absolute;
+    }
+    .hud{
+        position: absolute;
+        width: 100%;
+        bottom: 18px;
+        z-index: 1;
+    }
+    .panel-wrapper{
+        display: flex;
+    }
+    .panel{
+        display: flex;
+        justify-content: space-between;
+    
+    }
+    
+    .responsiv-button{
+        background: none;
+        height: 40px;
+        border: none;
+    }
+    
+    .responsiv-button:hover{
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    
+    .responsiv-img{
+        height: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .settings{
+        display: none;
+    }
+    .start-img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    .background{
+        height: 100%;
+        width: 100%;
+    }
+
+}
