@@ -54,7 +54,7 @@ canvas {
     color: white;
     border: 1.5px solid #C4613A;
     font-size: 16px;
-    bottom: 0px;
+    bottom: 8%;
     left: 40%;
     z-index: 100;
     position: absolute;
@@ -76,6 +76,7 @@ canvas {
     top: 97px;
     opacity: 1;
 }
+
 
 
 .restart-button {
@@ -258,6 +259,9 @@ canvas {
 .hud {
     display: none;
 }
+/* .setting-responsiv{
+    display: none;
+} */
 @media(max-width: 720px){
 
     h1{
@@ -270,9 +274,10 @@ canvas {
     }
     .hud{
         position: absolute;
+        display: inline;
         width: 100%;
         bottom: 18px;
-        z-index: 1;
+        z-index: 0;
     }
     .panel-wrapper{
         display: flex;

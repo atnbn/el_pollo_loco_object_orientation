@@ -108,7 +108,6 @@ function initLevel() {
     function StartGame() {
         document.getElementById('startButton').classList.add('d-none');
         document.getElementById('start-img').classList.add('d-none');
-        document.getElementById('hud').style.display = 'block';
         this.button_sound.play();
     }
 
