@@ -1,4 +1,4 @@
-class Bottles extends CollidableObject {
+class Bottle extends CollidableObject {
 
     IMAGES = [
         'img/6.botella/2.Botella_enterrada1.png',

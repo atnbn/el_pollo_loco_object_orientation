@@ -38,6 +38,7 @@ class Endboss extends CollidableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.checkEndbossState();
         this.x = 4600;
         this.y = 50;
         this.width = 200;
@@ -47,26 +48,12 @@ class Endboss extends CollidableObject {
 
     animate() {
         setInterval(() => {
-            if (this.energy == 0) {
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-            else if (this.isHurt()) {
-                console.log('Endboss hit')
-                this.playAnimation(this.IMAGES_HURT);
-            }
-            else if (this.kickAttack == true) {
-                this.playAnimation(this.IMAGES_ATTACK)
-            }
-            else if (this.kickAttack == false) {
-
-                this.playAnimation(this.IMAGES_WALKING)
-            } 
+           this.checkEndbossState();
         }, 200);
 
         setInterval(() => {
             if (world.character.x > 3800) {
                 this.unlockBoss = true;
-                console.log(this.unlockBoss)
             } if (this.unlockBoss == true) {
                 this.moveLeft();
             }
@@ -75,15 +62,56 @@ class Endboss extends CollidableObject {
         setInterval(() => {
             if (this.unlockBoss == true) {
                 this.jumpAttack();
-                // this.playAnimation(this.IMAGES_ATTACK)
                 this.kickAttack = true;
                 setTimeout(() => {
                     this.kickAttack = false;
-                    console.log('unlockboss =', this.unlockBoss)
                 }, 1000);
             }
         }, 2000);
     }
+
+
+    checkEndbossState(){
+        if (this.energy == 0) {
+            this.playAnimation(this.IMAGES_DEAD);
+        }
+        else if (this.isHurt()) {
+            console.log('Endboss hit')
+            this.playAnimation(this.IMAGES_HURT);
+        }
+        else if (this.kickAttack == true) {
+            this.playAnimation(this.IMAGES_ATTACK)
+        }
+        else if (this.kickAttack == false) {
+
+            this.playAnimation(this.IMAGES_WALKING)
+        } 
+    }
+
+
+
+
+
+    jumpAttack() {
+        // Chickens Jumps Forward
+        this.y -= 15
+        this.x -= 15
+        setTimeout(() => {
+                this.y += +5
+                this.x -= 5
+        }, 400);
+        setTimeout(() => {
+                this.y += +5
+                this.x -= 5
+
+        }, 300);
+
+        setTimeout(() => {
+                this.y += +5
+                this.x -= 5
+
+        }, 200);
+}
 }
 
 

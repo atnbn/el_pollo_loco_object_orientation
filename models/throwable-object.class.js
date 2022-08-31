@@ -28,6 +28,8 @@ class ThrowableObject extends CollidableObject {
         this.height = 80;
         this.width = 55;
         this.speedY = 15;
+        this.speed  = 12.5
+        this.checkThrowStatus();
         this.applyGravity();
         this.throw();
     }
@@ -35,16 +37,20 @@ class ThrowableObject extends CollidableObject {
 
     throw() {
         setInterval(() => {
-            if (this.splash == true) {
-                this.playAnimation(this.IMAGES_SPLASHING);
-            } else {
-                this.playAnimation(this.IMAGES_THROWING);
-            }
+            this.checkThrowStatus();
         }, 100)
 
         setInterval(() => {
-            this.x += 12.5;
+            this.moveRight()
         }, 25)
 
+    }
+    
+    checkThrowStatus(){
+        if (this.splash == true) {
+            this.playAnimation(this.IMAGES_SPLASHING);
+        } else {
+            this.playAnimation(this.IMAGES_THROWING);
+        }
     }
 }

@@ -26,10 +26,6 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-
-    Fullscreen() {
-        canvas.requestFullscreen();
-    }
 }
 
 

@@ -10,13 +10,13 @@ class World {
     coinBar = new CoinBar();
     endbossBar = new EndbossEnergyBar();
     throwableObjects = [];
-    coins = new Coins();
-    bottle = new Bottles();
+    coins = new Coin();
+    bottle = new Bottle();
     gameover = new GameOver();
     winscreen = new WinScreen();
     lose = false;
     win = false;
-    music_over = false;
+    music_over = false; 1
     bottleThrow = false;
     bottlepause = false;
 
@@ -44,6 +44,13 @@ class World {
         this.gameover_sound.muted = true;
         this.character.jump_sound.muted = true;
         this.character.walking_sound.muted = true;
+        document.getElementById('infoSound').style.display = 'block';
+        document.getElementById('infoSound').innerHTML = 'Sound: Off';
+        setTimeout(() => {
+            document.getElementById('infoSound').style.display = 'none';
+        }, 1000);
+
+
     }
 
     playSound() {
@@ -57,9 +64,15 @@ class World {
         this.gameover_sound.muted = false;
         this.character.jump_sound.muted = false;
         this.character.walking_sound.muted = false;
+        document.getElementById('infoSound').style.display = 'block';
+        document.getElementById('infoSound').innerHTML = 'Sound: ON';
+        setTimeout(() => {
+            document.getElementById('infoSound').style.display = 'none';
+        }, 1000);
+
     }
 
-        constructor(canvas, keyboard) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -78,9 +91,8 @@ class World {
 
     run() {
         setInterval(() => {
-            if (this.bottleBar.bottleAmount > 0) {
-                this.checkThrowObjects();
-            }
+
+            this.checkThrowObjects();
             this.checkCollisionswithBottle();
             this.checkCollisionswithCoins();
             this.checkGameOver();
@@ -96,7 +108,7 @@ class World {
     }
 
     checkGameOver() {
-        if (this.character.isDead() == true) {
+        if (this.character.isDead() == true && this.bottleBar.bottleAmount > 0) {
             this.lose = true;
             console.log('lose')
         }
@@ -137,7 +149,7 @@ class World {
             }
         })
     }
-    
+
     checkBottleCollisionwithEnemy() {
         this.throwableObjects.forEach((bubble) => {
             this.level.endboss.forEach((endboss) => {
@@ -159,19 +171,39 @@ class World {
         })
     }
 
+    // handleCollisionWithEndboss(bubble){
+    //     // if (endboss.isDead()) 
+    //     // this.win = true;
+    //     endboss.hit(bubble);
+    //     this.endbossBar.setPercentage(endboss.energy);
+    //     bubble.splash = true;
+    //     this.glass_sound.play();
+    // }
+
+    deleteObject(object, collection){
+                setTimeout(() => {
+                let index = collection.indexOf(object)
+            this.throwableObjects.splice(index, 1)
+            }, 200);
+        }
+
+
+
+
+
     checkCharacterEndbossCollision() {
-        this.level.endboss.forEach((endboss) => {
-            if (endboss.isCollidingObjects(this.character)) {
-                this.character.hit(endboss);
-                endboss.jumpAttack();
-                this.hurt_sound.play();
-                this.statusBar.setPercentage(this.character.energy);
-            }
-        })
-    }
+            this.level.endboss.forEach((endboss) => {
+                if (endboss.isCollidingObjects(this.character)) {
+                    this.character.hit(endboss);
+                    endboss.jumpAttack();
+                    this.hurt_sound.play();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+            })
+        }
 
     checkEnemyCharacterCollision(enemy, index, char) {
-        if (this.canCollide(enemy, char) && char.isColliding(enemy)) {
+            if(this.canCollide(enemy, char) && char.isColliding(enemy)) {
             if (char.isStamping(enemy, index)) {
                 enemy.energy = 0;
                 this.deadchicken_sound.play();
@@ -220,10 +252,17 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // Draw() wird immer wieder aufgerufen
         let self = this;
+
         requestAnimationFrame(function () {
             self.draw();
         });
-        // Lose screen
+
+        this.checkWin();
+        this.checkLose();
+
+
+    }
+    checkLose() {                // check why this is not working
         if (this.lose == true) {
             this.addToMap(this.gameover);
             this.gameover_sound.play();
@@ -231,15 +270,17 @@ class World {
                 window.location.href = "";
             }, 1000)
         }
+    }
+
+    checkWin() {
         if (this.win == true) {
-            this.win_sound.play();
             this.addToMap(this.winscreen);
+            this.win_sound.play();
             setTimeout(() => {
                 window.location.href = "";
             }, 2500)
         }
     }
-
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -269,7 +310,5 @@ class World {
         this.ctx.restore()
     }
 
-    Fullscreen() {
-        this.canvas.requestFullscreen()
-    }
+
 } 
