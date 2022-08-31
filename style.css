@@ -29,7 +29,7 @@ canvas {
 
 
 .fullscreen-img{
-    height: 36px;
+    height: 30px;
     margin-right: 10px;
 }
 .fullscreen-img:hover{
@@ -143,8 +143,34 @@ canvas {
 
 
 
+.info{
+    position: absolute;
+    top: 0;
+    width: 100px;
+    text-align: center;
+    z-index: 11;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    animation: 1.5s soundInfo forwards;
+    display: none;
+}
+
+@keyframes soundInfo {
+   0% {
+       opacity: 0;
+   }
+   50% {
+       opacity: 1;
+   }
+
+    100% {
+         opacity: 0;
+    }
+}
 
 
+ 
 
 
 
@@ -201,7 +227,7 @@ canvas {
 
 
 .turn-on__img{
-    height: 25px;
+    height: 30px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -259,9 +285,9 @@ canvas {
 .hud {
     display: none;
 }
-/* .setting-responsiv{
+.setting-responsiv{
     display: none;
-} */
+}
 @media(max-width: 720px){
 
     h1{
@@ -271,6 +297,7 @@ canvas {
         top: 12px;
         right: 1px;
         position: absolute;
+        display: block;
     }
     .hud{
         position: absolute;
