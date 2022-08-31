@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
         acceleration = 2.5;
         energy = 100;
         lastHit = 0;
+        
         applyGravity() {
                 setInterval(() => {
                         if (this.isAboveGround() || this.speedY > 0) {
@@ -30,7 +31,7 @@ class MovableObject extends DrawableObject {
                         this.x < mo.x &&
                         this.y < mo.y + mo.height;
         }
-        
+
         stop() {
                 setInterval(() => {
                         this.x == this.speed;
@@ -76,34 +77,12 @@ class MovableObject extends DrawableObject {
                 this.currentImage++;
         }
 
-
         moveRight() {
                 this.x += this.speed;
         }
 
         moveLeft() {
                 this.x -= this.speed;
-        }
-
-        jumpAttack() {
-                // Chickens Jumps Forward
-                this.y -= 15
-                this.x -= 15
-                setTimeout(() => {
-                        this.y += +5
-                        this.x -= 5
-                }, 400);
-                setTimeout(() => {
-                        this.y += +5
-                        this.x -= 5
-
-                }, 300);
-
-                setTimeout(() => {
-                        this.y += +5
-                        this.x -= 5
-
-                }, 200);
         }
 
         jump() {
