@@ -16,7 +16,7 @@ class World {
     winscreen = new WinScreen();
     lose = false;
     win = false;
-    music_over = false; 1
+    music_over = false;
     bottleThrow = false;
     bottlepause = false;
 
@@ -115,7 +115,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.bottlepause == false) {
+        if (this.keyboard.D && this.bottlepause == false && this.bottleBar.bottleAmount > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 50);
             this.throwableObjects.push(bottle)
             this.throw_sound.play();
@@ -171,39 +171,30 @@ class World {
         })
     }
 
-    // handleCollisionWithEndboss(bubble){
-    //     // if (endboss.isDead()) 
-    //     // this.win = true;
-    //     endboss.hit(bubble);
-    //     this.endbossBar.setPercentage(endboss.energy);
-    //     bubble.splash = true;
-    //     this.glass_sound.play();
-    // }
-
-    deleteObject(object, collection){
-                setTimeout(() => {
-                let index = collection.indexOf(object)
+    deleteObject(object, collection) {
+        setTimeout(() => {
+            let index = collection.indexOf(object)
             this.throwableObjects.splice(index, 1)
-            }, 200);
-        }
+        }, 200);
+    }
 
 
 
 
 
     checkCharacterEndbossCollision() {
-            this.level.endboss.forEach((endboss) => {
-                if (endboss.isCollidingObjects(this.character)) {
-                    this.character.hit(endboss);
-                    endboss.jumpAttack();
-                    this.hurt_sound.play();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            })
-        }
+        this.level.endboss.forEach((endboss) => {
+            if (endboss.isCollidingObjects(this.character)) {
+                this.character.hit(endboss);
+                endboss.jumpAttack();
+                this.hurt_sound.play();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        })
+    }
 
     checkEnemyCharacterCollision(enemy, index, char) {
-            if(this.canCollide(enemy, char) && char.isColliding(enemy)) {
+        if (this.canCollide(enemy, char) && char.isColliding(enemy)) {
             if (char.isStamping(enemy, index)) {
                 enemy.energy = 0;
                 this.deadchicken_sound.play();
@@ -263,7 +254,7 @@ class World {
 
     }
     checkLose() {                // check why this is not working
-        if (this.lose == true) {
+        if (this.lose) {
             this.addToMap(this.gameover);
             this.gameover_sound.play();
             setTimeout(() => {
@@ -273,7 +264,7 @@ class World {
     }
 
     checkWin() {
-        if (this.win == true) {
+        if (this.win) {
             this.addToMap(this.winscreen);
             this.win_sound.play();
             setTimeout(() => {
